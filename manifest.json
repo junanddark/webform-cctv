@@ -1,0 +1,15 @@
+{
+  "name": "CCTV Report Lebak",
+  "short_name": "CCTV Lebak",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f0f2f5",
+  "theme_color": "#007bff",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3201/3201940.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

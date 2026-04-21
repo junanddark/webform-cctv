@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCTV REPORT HYBRID COMPLETE - LEBAK</title>
+    <style>
+        :root { --primary: #007bff; --success: #28a745; }
+        body { font-family: sans-serif; background: #f0f2f5; padding: 10px; margin: 0; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h2 { text-align: center; color: #333; margin-top: 0; font-size: 18px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .section-title { background: #eee; padding: 5px 10px; font-size: 12px; font-weight: bold; margin: 15px 0 10px 0; border-radius: 4px; color: #555; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 12px; color: #555; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; background: #fff; font-family: sans-serif; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-gen { background: var(--primary); color: white; }
+        .btn-copy { background: var(--success); color: white; display: none; }
+        #hasilLaporan { margin-top: 20px; white-space: pre-wrap; background: #fff9c4; padding: 15px; border: 1px dashed #fbc02d; border-radius: 8px; font-family: monospace; font-size: 12px; display: none; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>📝 CCTV HYBRID COMPLETE GENERATOR</h2>
+    
+    <div class="form-group">
+        <label>TANGGAL KUNJUNGAN</label>
+        <input type="date" id="tglCustom">
+    </div>
+
+    <div class="grid">
+        <div class="form-group">
+            <label>KDTK</label>
+            <input list="daftarToko" id="kdtk" oninput="isiOtomatis()" placeholder="F8MM">
+            <datalist id="daftarToko"></datalist>
+        </div>
+        <div class="form-group">
+            <label>NAMA TK</label>
+            <input type="text" id="namaTk" readonly style="background: #eee;">
+        </div>
+    </div>
+
+    <div class="section-title">KONFIGURASI DVR</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>TIPE DVR 1 (STANDAR)</label>
+            <select id="tipeDvr1">
+                <option value="DAHUA TECHNOLOGY">DAHUA</option>
+                <option value="GO SECURE">GO SECURE</option>
+                <option value="HIKVISION OLD">HIKVISION OLD</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>TIPE DVR 2 (NEW)</label>
+            <input type="text" id="tipeDvr2" value="HIKVISION NEW" readonly style="background: #eee;">
+        </div>
+    </div>
+    <div class="grid">
+        <div class="form-group">
+            <label>POSISI DVR</label>
+            <select id="posDvr">
+                <option value="DI GUDANG">DI GUDANG</option>
+                <option value="DI BELAKANG SHOWCASE">DI BLK SHOWCASE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>JML CAM PARKIR</label>
+            <input type="text" id="camParkir" value="2 (DILUAR FG)">
+        </div>
+    </div>
+
+    <div class="section-title">REKAMAN & KAMERA</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>LAMA REKAMAN 1</label>
+            <select id="lama1">
+                <script>
+                    for(let i=1; i<=150; i++) {
+                        let sel = i === 25 ? 'selected' : '';
+                        document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>LAMA REKAMAN 2</label>
+            <select id="lama2">
+                <script>
+                    for(let i=1; i<=150; i++) {
+                        let sel = i === 30 ? 'selected' : '';
+                        document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                    }
+                </script>
+            </select>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="form-group">
+            <label>TOTAL KAMERA</label>
+            <input type="text" id="totalCam" placeholder="18" oninput="hitungRusak()">
+        </div>
+        <div class="form-group">
+            <label>KAMERA AKTIF</label>
+            <input type="number" id="camAktif" placeholder="18" oninput="hitungRusak()">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>KAMERA RUSAK</label>
+        <input type="text" id="camRusak" readonly style="background: #eee;">
+    </div>
+
+    <div class="section-title">HARDWARE STATUS</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>MONITOR</label>
+            <select id="mon">
+                <option value="ADA / MENYALA">ADA / NYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>KRANGKENG</label>
+            <select id="krk">
+                <option value="ADA / DIKUNCI">ADA / KUNCI</option>
+                <option value="ADA / TIDAK DIKUNCI">ADA / TDK KUNCI</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="form-group">
+            <label>GEMBOK</label>
+            <select id="gbk"><option value="TIDAK ADA">TIDAK ADA</option><option value="ADA">ADA</option></select>
+        </div>
+        <div class="form-group">
+            <label>UPS</label>
+            <select id="ups">
+                <option value="ADA / MENYALA">ADA / NYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="form-group">
+            <label>STABILIZER</label>
+            <select id="stb">
+                <option value="ADA / MENYALA">ADA / NYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>RESOLUSI</label>
+            <input type="text" id="res" value="1280*1024">
+        </div>
+    </div>
+
+    <div class="section-title">STORAGE & ONLINE</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>HDD DVR 1</label>
+            <select id="hdd1">
+                <option value="1 TB">1 TB</option>
+                <option value="2 TB" selected>2 TB</option>
+                <option value="4 TB">4 TB</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>HDD DVR 2</label>
+            <select id="hdd2">
+                <option value="1 TB">1 TB</option>
+                <option value="2 TB" selected>2 TB</option>
+                <option value="4 TB">4 TB</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>CCTV ONLINE</label>
+        <input type="text" id="cctvOn" value="TIDAK DAPAT DICEK">
+    </div>
+
+    <div class="section-title">WAKTU & BACKUP</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>SELISIH DVR 1</label>
+            <input type="text" id="sel1" value="- (DISESUAIKAN)">
+        </div>
+        <div class="form-group">
+            <label>SELISIH DVR 2</label>
+            <input type="text" id="sel2" value="- (DISESUAIKAN)">
+        </div>
+    </div>
+    <div class="form-group">
+        <label>TGL & JAM BACK UP (Bisa Enter)</label>
+        <textarea id="backTgl" rows="3" placeholder="- SOPP1 : 17/04/2026 JAM 06:23 - 06:27"></textarea>
+    </div>
+    <div class="form-group">
+        <label>CHANEL BACK UP</label>
+        <input type="text" id="chanel" value="7.8.9">
+    </div>
+
+    <div class="section-title">TEMUAN & LAINNYA</div>
+    <div class="form-group"><label>TEMUAN</label><input type="text" id="temuan" value="BUKA TOKO SENDIRI"></div>
+    <div class="form-group"><label>KENDALA</label><input type="text" id="kendala" value="-"></div>
+    <div class="form-group"><label>NO CO</label><input type="text" id="noco" value="-"></div>
+    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2">Aman Terkendali.</textarea></div>
+
+    <button class="btn-gen" onclick="prosesLaporan()">BUAT LAPORAN</button>
+    
+    <div id="hasilLaporan"></div>
+    <button id="copyBtn" class="btn-copy" onclick="copyTeks()">📋 SALIN LAPORAN</button>
+</div>
+
+<script src="data-toko.js"></script>
+
+<script>
+    const dataList = document.getElementById('daftarToko');
+    listToko.forEach(t => {
+        let opt = document.createElement('option');
+        opt.value = t.kode;
+        opt.textContent = t.nama;
+        dataList.appendChild(opt);
+    });
+
+    document.getElementById('tglCustom').valueAsDate = new Date();
+
+    function isiOtomatis() {
+        const val = document.getElementById('kdtk').value.toUpperCase();
+        const found = listToko.find(t => t.kode === val);
+        document.getElementById('namaTk').value = found ? found.nama : "";
+        hitungRusak();
+    }
+
+    function hitungRusak() {
+        const totalRaw = document.getElementById('totalCam').value;
+        const total = parseInt(totalRaw) || 0;
+        const aktif = parseInt(document.getElementById('camAktif').value) || 0;
+        document.getElementById('camRusak').value = (total - aktif) + " KAMERA";
+    }
+
+    function prosesLaporan() {
+        const kdtk = document.getElementById('kdtk').value.toUpperCase();
+        const namaTk = document.getElementById('namaTk').value;
+        const tipe1 = document.getElementById('tipeDvr1').value;
+        const tipe2 = document.getElementById('tipeDvr2').value;
+        const d = new Date(document.getElementById('tglCustom').value);
+        
+        if(!kdtk || !namaTk) return alert("Pilih KDTK!");
+
+        // PASS STANDAR (DVR 1)
+        const pass1 = {
+            admin: "G157" + kdtk + "911",
+            ic: "LEBAK1234",
+            mtc: "ACLLBK123",
+            edp: "EDP" + kdtk + "999",
+            area: kdtk + "4321"
+        };
+
+        // PASS HIKVISION NEW (DVR 2)
+        const pass2 = {
+            admin: "G157" + kdtk + "911",
+            ic: "LEBAK@12",
+            mtc: "ACLLBK12",
+            edp: kdtk + "@999",
+            area: kdtk + "@432"
+        };
+
+        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long' }).toUpperCase() + "\n" + 
+                         d.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase();
+
+        const template = `LAPORAN KUNJUNGAN CCTV, ${tglFinal} 
+
+KDTK : ${kdtk}
+NAMA TK : ${namaTk} 
+TIPE DVR 1 : ${tipe1} 
+TIPE DVR 2 : ${tipe2} 
+POSISI DVR : ${document.getElementById('posDvr').value} 
+POSISI CAM.PARKIR : ${document.getElementById('camParkir').value} 
+
+PASS DVR 1 (${tipe1}) :
+- ADMIN : ${pass1.admin}
+- IC : ${pass1.ic}
+- MTC : ${pass1.mtc}
+- EDP : ${pass1.edp}
+- AREA : ${pass1.area}
+
+PASS DVR 2 (${tipe2}) :
+- ADMIN : ${pass2.admin}
+- IC : ${pass2.ic}
+- MTC : ${pass2.mtc}
+- EDP : ${pass2.edp}
+- AREA : ${pass2.area}
+
+LAMA REKAMAN DVR 1 : ${document.getElementById('lama1').value}
+LAMA REKAMAN DVR 2 : ${document.getElementById('lama2').value}
+TOTAL KAMERA : ${document.getElementById('totalCam').value} KAMERA
+AKTIF : ${document.getElementById('camAktif').value} KAMERA
+RUSAK : ${document.getElementById('camRusak').value}
+MONITOR : ${document.getElementById('mon').value} 
+KRANGKENG : ${document.getElementById('krk').value}
+GEMBOK : ${document.getElementById('gbk').value} 
+UPS : ${document.getElementById('ups').value} 
+STABILIZER : ${document.getElementById('stb').value} 
+HDD DVR 1 : ${document.getElementById('hdd1').value} 
+HDD DVR 2 : ${document.getElementById('hdd2').value} 
+RESOLUSI DVR : ${document.getElementById('res').value}
+CCTV ONLINE : ${document.getElementById('cctvOn').value} 
+SELISIH WAKTU DVR 1 : ${document.getElementById('sel1').value}
+SELISIH WAKTU DVR 2 : ${document.getElementById('sel2').value}
+TGL & JAM BACK UP :
+${document.getElementById('backTgl').value}
+CHANEL BACK UP : ${document.getElementById('chanel').value}
+TEMUAN : ${document.getElementById('temuan').value} 
+KENDALA : ${document.getElementById('kendala').value}
+NO CO : ${document.getElementById('noco').value}
+NOTE : ${document.getElementById('valNote').value}`;
+
+        const res = document.getElementById('hasilLaporan');
+        res.innerText = template;
+        res.style.display = 'block';
+        document.getElementById('copyBtn').style.display = 'block';
+        res.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyTeks() {
+        navigator.clipboard.writeText(document.getElementById('hasilLaporan').innerText);
+        alert("Laporan disalin!");
+    }
+</script>
+</body>
+</html>

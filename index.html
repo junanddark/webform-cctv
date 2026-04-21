@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCTV HUB - AREA LEBAK</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#007bff">
+    <style>
+        :root { --primary: #007bff; --dark: #333; --bg: #f0f2f5; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 15px; }
+        
+        .header { text-align: center; padding: 20px 0; margin-bottom: 20px; }
+        .header h1 { margin: 0; font-size: 24px; color: var(--dark); }
+        .header p { margin: 5px 0 0; color: #666; font-size: 14px; }
+
+        .menu-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        
+        .card { 
+            background: white; border-radius: 12px; padding: 20px; 
+            display: flex; align-items: center; text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #ddd;
+            transition: 0.2s;
+        }
+        .card:active { transform: scale(0.97); background: #f8f9fa; }
+        
+        .icon-box { 
+            width: 50px; height: 50px; border-radius: 10px; 
+            background: #e7f1ff; display: flex; align-items: center; 
+            justify-content: center; font-size: 24px; margin-right: 15px;
+        }
+        
+        .info h3 { margin: 0; font-size: 16px; color: var(--primary); }
+        .info p { margin: 2px 0 0; font-size: 12px; color: #777; }
+
+        .footer { text-align: center; margin-top: 30px; font-size: 11px; color: #aaa; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🎥 CCTV REPORT HUB</h1>
+    <p>Pilih Tipe Laporan - Area Lebak</p>
+</div>
+
+<div class="menu-grid">
+    <a href="dvr1dahua.html" class="card">
+        <div class="icon-box">📁</div>
+        <div class="info">
+            <h3>Laporan 1 DVR Standar</h3>
+            <p>Dahua / Go Secure / Hikvision Old</p>
+        </div>
+    </a>
+
+    <a href="dvr2dahua.html" class="card">
+        <div class="icon-box">📂</div>
+        <div class="info">
+            <h3>Laporan 2 DVR Standar</h3>
+            <p>Dual DVR Dahua / Go Secure</p>
+        </div>
+    </a>
+
+    <a href="dvr1hik.html" class="card">
+        <div class="icon-box">🛡️</div>
+        <div class="info">
+            <h3>Laporan 1 DVR Hik-New</h3>
+            <p>Password Baru (Simbol @)</p>
+        </div>
+    </a>
+
+    <a href="dvr2hik.html" class="card">
+        <div class="icon-box">🏰</div>
+        <div class="info">
+            <h3>Laporan 2 DVR Hik-New</h3>
+            <p>Password Baru (Simbol @)</p>
+        </div>
+    </a>
+
+    <a href="dvr2hybrid.html" class="card">
+        <div class="icon-box">⚡</div>
+        <div class="info">
+            <h3>Laporan Hybrid DVR</h3>
+            <p>Gabungan Standar + Hik-New</p>
+        </div>
+    </a>
+</div>
+
+<div class="footer">
+    ENDAS STUDIO &copy; 2026<br>
+    Sistem Pelaporan CCTV Area Lebak
+</div>
+
+<script>
+    // Mendaftarkan Service Worker agar bisa diinstal di HP
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+    }
+</script>
+
+</body>
+</html>
