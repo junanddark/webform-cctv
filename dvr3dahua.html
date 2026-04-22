@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCTV REPORT HYBRID COMPLETE - LEBAK</title>
+    <title>CCTV REPORT 3 DVR - LEBAK</title>
     <style>
         :root { --primary: #007bff; --success: #28a745; }
         body { font-family: sans-serif; background: #f0f2f5; padding: 10px; margin: 0; }
@@ -23,7 +23,7 @@
 <body>
 
 <div class="card">
-    <h2>📝 CCTV HYBRID COMPLETE GENERATOR</h2>
+    <h2>📝 CCTV REPORT GENERATOR (3 DVR)</h2>
     
     <div class="form-group">
         <label>TANGGAL KUNJUNGAN</label>
@@ -43,53 +43,54 @@
     </div>
 
     <div class="section-title">KONFIGURASI DVR</div>
-    <div class="grid">
-        <div class="form-group">
-            <label>TIPE DVR 1 (STANDAR)</label>
-            <select id="tipeDvr1">
-                <option value="DAHUA TECHNOLOGY">DAHUA</option>
-                <option value="GO SECURE">GO SECURE</option>
-                <option value="HIKVISION OLD">HIKVISION OLD</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>TIPE DVR 2 (NEW)</label>
-            <input type="text" id="tipeDvr2" value="HIKVISION NEW" readonly style="background: #eee;">
-        </div>
+    <div class="form-group">
+        <label>TIPE ALL DVR</label>
+        <input type="text" id="tipeDvr" value="DAHUA TECHNOLOGY (ALL)">
     </div>
     <div class="grid">
         <div class="form-group">
             <label>POSISI DVR</label>
             <select id="posDvr">
                 <option value="DI GUDANG">DI GUDANG</option>
-                <option value="DI BELAKANG SHOWCASE">DI BALIK SHOWCASE</option>
+                <option value="DI BELAKANG SHOWCASE">DI BLK SHOWCASE</option>
             </select>
         </div>
         <div class="form-group">
-            <label>JML CAM PARKIR</label>
-            <input type="text" id="camParkir" value="2 (DILUAR FG)">
+            <label>POSISI CAM PARKIR</label>
+            <input type="text" id="camParkir" value="9 (DILUAR FOULDING GATE)">
         </div>
     </div>
 
     <div class="section-title">REKAMAN & KAMERA</div>
+    <div class="form-group">
+        <label>LAMA REKAMAN 1 (GUDANG)</label>
+        <select id="lama1">
+            <script>
+                for(let i=1; i<=150; i++) {
+                    let sel = i === 68 ? 'selected' : '';
+                    document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                }
+            </script>
+        </select>
+    </div>
     <div class="grid">
         <div class="form-group">
-            <label>LAMA REKAMAN DVR 1</label>
-            <select id="lama1">
+            <label>LAMA REKAMAN 2 (TOKO)</label>
+            <select id="lama2">
                 <script>
                     for(let i=1; i<=150; i++) {
-                        let sel = i === 25 ? 'selected' : '';
+                        let sel = i === 21 ? 'selected' : '';
                         document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
                     }
                 </script>
             </select>
         </div>
         <div class="form-group">
-            <label>LAMA REKAMAN DVR 2</label>
-            <select id="lama2">
+            <label>LAMA REKAMAN 3 (LUAR)</label>
+            <select id="lama3">
                 <script>
                     for(let i=1; i<=150; i++) {
-                        let sel = i === 30 ? 'selected' : '';
+                        let sel = i === 46 ? 'selected' : '';
                         document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
                     }
                 </script>
@@ -99,63 +100,80 @@
     <div class="grid">
         <div class="form-group">
             <label>TOTAL KAMERA</label>
-            <input type="text" id="totalCam" placeholder="18" oninput="hitungRusak()">
+            <input type="text" id="totalCam" placeholder="34 (10+15+9)" oninput="hitungMati()">
         </div>
         <div class="form-group">
             <label>KAMERA AKTIF</label>
-            <input type="number" id="camAktif" placeholder="18" oninput="hitungRusak()">
+            <input type="number" id="camAktif" placeholder="34" oninput="hitungMati()">
         </div>
     </div>
     <div class="form-group">
-        <label>KAMERA RUSAK</label>
-        <input type="text" id="camRusak" readonly style="background: #eee;">
+        <label>KAMERA MATI</label>
+        <input type="text" id="camMati" readonly style="background: #eee;">
+    </div>
+
+    <div class="section-title">STATUS MONITOR</div>
+    <div class="form-group">
+        <label>MONITOR DVR 1 (GUDANG)</label>
+        <select id="mon1">
+            <option value="ADA / MENYALA">ADA / MENYALA</option>
+            <option value="ADA / TIDAK MENYALA" selected>ADA / TIDAK MENYALA</option>
+            <option value="TIDAK ADA">TIDAK ADA</option>
+        </select>
+    </div>
+    <div class="grid">
+        <div class="form-group">
+            <label>MONITOR DVR 2</label>
+            <select id="mon2">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>MONITOR DVR 3</label>
+            <select id="mon3">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
     </div>
 
     <div class="section-title">HARDWARE STATUS</div>
     <div class="grid">
         <div class="form-group">
-            <label>MONITOR</label>
-            <select id="mon">
-                <option value="ADA / MENYALA">ADA / MENYALA</option>
-                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+            <label>KRANGKENG</label>
+            <select id="krk">
+                <option value="ADA / DIKUNCI">ADA / DIKUNCI</option>
+                <option value="ADA / TIDAK DIKUNCI">ADA / TIDAK DIKUNCI</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
         <div class="form-group">
-            <label>KRANGKENG</label>
-            <select id="krk">
-                <option value="ADA / DIKUNCI">ADA / DIKUNCI</option>
-                <option value="ADA / TIDAK DIKUNCI">ADA / TDK DIKUNCI</option>
+            <label>GEMBOK</label>
+            <select id="gbk">
+                <option value="ADA / MENGUNCI">ADA / MENGUNCI</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
     </div>
     <div class="grid">
-        <div class="form-group">
-            <label>GEMBOK</label>
-            <select id="gbk"><option value="TIDAK ADA">TIDAK ADA</option><option value="ADA / MENGUNCI">ADA / MENGUNCI</option></select>
-        </div>
         <div class="form-group">
             <label>UPS</label>
             <select id="ups">
                 <option value="ADA / MENYALA">ADA / MENYALA</option>
-                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="ADA / TIDAK MENYALA" selected>ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
-    </div>
-    <div class="grid">
         <div class="form-group">
             <label>STABILIZER</label>
             <select id="stb">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
-                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA" selected>ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label>RESOLUSI</label>
-            <input type="text" id="res" value="1280*1024">
         </div>
     </div>
 
@@ -166,7 +184,7 @@
             <select id="hdd1">
                 <option value="1 TB">1 TB</option>
                 <option value="2 TB" selected>2 TB</option>
-                <option value="4 TB">4 TB</option>
+                <option value="3 TB">3 TB</option>
             </select>
         </div>
         <div class="form-group">
@@ -174,33 +192,43 @@
             <select id="hdd2">
                 <option value="1 TB">1 TB</option>
                 <option value="2 TB" selected>2 TB</option>
-                <option value="4 TB">4 TB</option>
+                <option value="3 TB">3 TB</option>
             </select>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="form-group">
+            <label>HDD DVR 3</label>
+            <select id="hdd3">
+                <option value="1 TB">1 TB</option>
+                <option value="2 TB" selected>2 TB</option>
+                <option value="3 TB">3 TB</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>RESOLUSI</label>
+            <input type="text" id="res" value="1280*1024 (ALL)">
         </div>
     </div>
     <div class="form-group">
         <label>CCTV ONLINE</label>
-        <input type="text" id="cctvOn" value="TIDAK DAPAT DICEK">
+        <input type="text" id="cctvOn" value="TIDAK BISA DICEK">
     </div>
 
     <div class="section-title">WAKTU & BACKUP</div>
-    <div class="grid">
-        <div class="form-group">
-            <label>SELISIH DVR 1</label>
-            <input type="text" id="sel1" value="- (DISESUAIKAN)">
-        </div>
-        <div class="form-group">
-            <label>SELISIH DVR 2</label>
-            <input type="text" id="sel2" value="- (DISESUAIKAN)">
-        </div>
+    <div class="form-group">
+        <label>SELISIH WAKTU</label>
+        <input type="text" id="sel" value="- (DISESUAIKAN)">
     </div>
     <div class="form-group">
         <label>TGL & JAM BACK UP (Bisa Enter)</label>
-        <textarea id="backTgl" rows="3" placeholder="- SOPP1 : 17/04/2026 JAM 06:23 - 06:27"></textarea>
+        <textarea id="backTgl" rows="4">- SOP P1 : 07/03/2026 JAM 03:46 - 03:50
+- PERMINTAAN : 06/03/2026
+- PERMINTAAN : 06/03/2026</textarea>
     </div>
     <div class="form-group">
         <label>CHANEL BACK UP</label>
-        <input type="text" id="chanel" value="7.8.9">
+        <input type="text" id="chanel" value="4.5.9">
     </div>
 
     <div class="section-title">TEMUAN & LAINNYA</div>
@@ -238,85 +266,57 @@
         const val = document.getElementById('kdtk').value.toUpperCase();
         const found = listToko.find(t => t.kode === val);
         document.getElementById('namaTk').value = found ? found.nama : "";
-        hitungRusak();
+        hitungMati();
     }
 
-    function hitungRusak() {
+    function hitungMati() {
         const totalRaw = document.getElementById('totalCam').value;
         const total = parseInt(totalRaw) || 0;
         const aktif = parseInt(document.getElementById('camAktif').value) || 0;
-        document.getElementById('camRusak').value = (total - aktif) + " KAMERA";
+        document.getElementById('camMati').value = (total - aktif) + " KAMERA";
     }
 
     function prosesLaporan() {
         const kdtk = document.getElementById('kdtk').value.toUpperCase();
         const namaTk = document.getElementById('namaTk').value;
-        const tipe1 = document.getElementById('tipeDvr1').value;
-        const tipe2 = document.getElementById('tipeDvr2').value;
         const d = new Date(document.getElementById('tglCustom').value);
         
         if(!kdtk || !namaTk) return alert("Pilih KDTK!");
 
-        // PASS STANDAR (DVR 1)
-        const pass1 = {
-            admin: "G157" + kdtk + "911",
-            ic: "LEBAK1234",
-            mtc: "ACLLBK123",
-            edp: "EDP" + kdtk + "999",
-            area: kdtk + "4321"
-        };
+        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase();
 
-        // PASS HIKVISION NEW (DVR 2)
-        const pass2 = {
-            admin: "G157" + kdtk + "911",
-            ic: "LEBAK@12",
-            mtc: "ACLLBK12",
-            edp: kdtk + "@999",
-            area: kdtk + "@432"
-        };
-
-        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long' }).toUpperCase() + "\n" + 
-                         d.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase();
-
-        const template = `LAPORAN KUNJUNGAN CCTV, ${tglFinal} 
+        const template = `LAPORAN KUNJUNGAN CCTV ${tglFinal} 
 
 KDTK : ${kdtk}
 NAMA TK : ${namaTk} 
-TIPE DVR 1 : ${tipe1} 
-TIPE DVR 2 : ${tipe2} 
+TIPE ALL DVR : ${document.getElementById('tipeDvr').value} 
 POSISI DVR : ${document.getElementById('posDvr').value} 
 POSISI CAM.PARKIR : ${document.getElementById('camParkir').value} 
-
-PASS DVR 1 (${tipe1}) :
-- ADMIN : ${pass1.admin}
-- IC : ${pass1.ic}
-- MTC : ${pass1.mtc}
-- EDP : ${pass1.edp}
-- AREA : ${pass1.area}
-
-PASS DVR 2 (${tipe2}) :
-- ADMIN : ${pass2.admin}
-- IC : ${pass2.ic}
-- MTC : ${pass2.mtc}
-- EDP : ${pass2.edp}
-- AREA : ${pass2.area}
-
-LAMA REKAMAN DVR 1 : ${document.getElementById('lama1').value}
-LAMA REKAMAN DVR 2 : ${document.getElementById('lama2').value}
-TOTAL KAMERA : ${document.getElementById('totalCam').value} KAMERA
+PASS ALL DVR :
+- ADMIN : G157${kdtk}911
+- IC : LEBAK1234
+- MTC : ACLLBK123
+- EDP : EDP${kdtk}999
+- AREA : ${kdtk}4321
+LAMA REKAMAN DVR 1 (GUDANG) : ${document.getElementById('lama1').value}
+LAMA REKAMAN DVR 2 (TOKO) : ${document.getElementById('lama2').value}
+LAMA REKAMAN DVR 3 (LUAR TOKO) : ${document.getElementById('lama3').value}
+JUMLAH KAMERA : ${document.getElementById('totalCam').value} KAMERA
 AKTIF : ${document.getElementById('camAktif').value} KAMERA
-RUSAK : ${document.getElementById('camRusak').value}
-MONITOR : ${document.getElementById('mon').value} 
+MATI : ${document.getElementById('camMati').value}
+MONITOR DVR 1 : ${document.getElementById('mon1').value}
+MONITOR DVR 2 : ${document.getElementById('mon2').value}
+MONITOR DVR 3 : ${document.getElementById('mon3').value}
 KRANGKENG : ${document.getElementById('krk').value}
 GEMBOK : ${document.getElementById('gbk').value} 
 UPS : ${document.getElementById('ups').value} 
 STABILIZER : ${document.getElementById('stb').value} 
 HDD DVR 1 : ${document.getElementById('hdd1').value} 
 HDD DVR 2 : ${document.getElementById('hdd2').value} 
+HDD DVR 3 : ${document.getElementById('hdd3').value} 
 RESOLUSI DVR : ${document.getElementById('res').value}
 CCTV ONLINE : ${document.getElementById('cctvOn').value} 
-SELISIH WAKTU DVR 1 : ${document.getElementById('sel1').value}
-SELISIH WAKTU DVR 2 : ${document.getElementById('sel2').value}
+SELISIH WAKTU : ${document.getElementById('sel').value}
 TGL & JAM BACK UP :
 ${document.getElementById('backTgl').value}
 CHANEL BACK UP : ${document.getElementById('chanel').value}

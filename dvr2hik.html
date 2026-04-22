@@ -58,7 +58,7 @@
             <label>POSISI DVR</label>
             <select id="posDvr">
                 <option value="DI GUDANG">DI GUDANG</option>
-                <option value="DI BELAKANG SHOWCASE">DI BLK SHOWCASE</option>
+                <option value="DI BELAKANG SHOWCASE">DI BALIK SHOWCASE</option>
             </select>
         </div>
         <div class="form-group">
@@ -70,7 +70,7 @@
     <div class="section-title">REKAMAN & KAMERA</div>
     <div class="grid">
         <div class="form-group">
-            <label>LAMA REKAMAN 1</label>
+            <label>LAMA REKAMAN DVR 1</label>
             <select id="lama1">
                 <script>
                     for(let i=1; i<=150; i++) {
@@ -81,7 +81,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label>LAMA REKAMAN 2</label>
+            <label>LAMA REKAMAN DVR 2</label>
             <select id="lama2">
                 <script>
                     for(let i=1; i<=150; i++) {
@@ -112,7 +112,7 @@
         <div class="form-group">
             <label>MONITOR</label>
             <select id="mon">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
                 <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
@@ -120,8 +120,8 @@
         <div class="form-group">
             <label>KRANGKENG</label>
             <select id="krk">
-                <option value="ADA / DIKUNCI">ADA / KUNCI</option>
-                <option value="ADA / TIDAK DIKUNCI">ADA / TDK KUNCI</option>
+                <option value="ADA / DIKUNCI">ADA / DIKUNCI</option>
+                <option value="ADA / TIDAK DIKUNCI">ADA / TDK DIKUNCI</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
@@ -129,12 +129,12 @@
     <div class="grid">
         <div class="form-group">
             <label>GEMBOK</label>
-            <select id="gbk"><option value="TIDAK ADA">TIDAK ADA</option><option value="ADA">ADA</option></select>
+            <select id="gbk"><option value="TIDAK ADA">TIDAK ADA</option><option value="ADA / MENGUNCI">ADA / MENGUNCI</option></select>
         </div>
         <div class="form-group">
             <label>UPS</label>
             <select id="ups">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
                 <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
@@ -144,7 +144,7 @@
         <div class="form-group">
             <label>STABILIZER</label>
             <select id="stb">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
                 <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
@@ -198,10 +198,16 @@
     </div>
 
     <div class="section-title">TEMUAN & LAINNYA</div>
-    <div class="form-group"><label>TEMUAN</label><input type="text" id="temuan" value="BUKA TOKO SENDIRI"></div>
-    <div class="form-group"><label>KENDALA</label><input type="text" id="kendala" value="-"></div>
+    <div class="form-group">
+        <label>TEMUAN</label>
+        <textarea id="temuan" rows="2">-</textarea>
+    </div>
+    <div class="form-group">
+        <label>KENDALA</label>
+        <textarea id="kendala" rows="2">-</textarea>
+    </div>
     <div class="form-group"><label>NO CO</label><input type="text" id="noco" value="-"></div>
-    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2">Aman Terkendali.</textarea></div>
+    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2">-</textarea></div>
 
     <button class="btn-gen" onclick="prosesLaporan()">BUAT LAPORAN</button>
     

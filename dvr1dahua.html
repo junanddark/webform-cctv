@@ -56,7 +56,7 @@
             <label>POSISI DVR</label>
             <select id="posisiDvr">
                 <option value="DI GUDANG">DI GUDANG</option>
-                <option value="DI BELAKANG SHOWCASE">DI BLK SHOWCASE</option>
+                <option value="DI BELAKANG SHOWCASE">DI BALIK SHOWCASE</option>
             </select>
         </div>
     </div>
@@ -66,7 +66,7 @@
             <select id="posisiCamParkir">
                 <option value="DIDALAM FG">DIDALAM FG</option>
                 <option value="DILUAR FG">DILUAR FG</option>
-                <option value="DIDALAM & DILUAR FG">DIDALAM & LUAR FG</option>
+                <option value="DIDALAM & DILUAR FG">DIDALAM & DILUAR FG</option>
             </select>
         </div>
         <div class="form-group">
@@ -81,7 +81,7 @@
             <label>LAMA REKAMAN</label>
             <select id="lamaRekaman">
                 <script>
-                    for(let i=1; i<=100; i++) {
+                    for(let i=1; i<=150; i++) {
                         let sel = i === 20 ? 'selected' : '';
                         document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
                     }
@@ -90,7 +90,7 @@
         </div>
         <div class="form-group">
             <label>TOTAL KAMERA</label>
-            <input type="number" id="jmlKamera" placeholder="14" oninput="hitungMati()">
+            <input type="text" id="jmlKamera" placeholder="14" oninput="hitungMati()">
         </div>
     </div>
     <div class="grid">
@@ -100,7 +100,7 @@
         </div>
         <div class="form-group">
             <label>KAMERA MATI</label>
-            <input type="number" id="camMati" readonly style="background: #eee;">
+            <input type="text" id="camMati" readonly style="background: #eee;">
         </div>
     </div>
 
@@ -109,16 +109,17 @@
         <div class="form-group">
             <label>MONITOR</label>
             <select id="valMonitor">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
-                <option value="ADA / TIDAK MENYALA">ADA / TIDAK NYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
         <div class="form-group">
             <label>KRANGKENG</label>
             <select id="valKrangkeng">
-                <option value="ADA / DIKUNCI">ADA / KUNCI</option>
-                <option value="ADA / TIDAK DIKUNCI">ADA / TDK KUNCI</option>
+                <option value="ADA / DIKUNCI">ADA / DIKUNCI</option>
+                <option value="ADA / TIDAK DIKUNCI">ADA / TIDAK DIKUNCI</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
     </div>
@@ -127,14 +128,14 @@
             <label>GEMBOK</label>
             <select id="valGembok">
                 <option value="TIDAK ADA">TIDAK ADA</option>
-                <option value="ADA / MENGUNCI">ADA/MENGUNCI</option>
+                <option value="ADA / MENGUNCI">ADA / MENGUNCI</option>
             </select>
         </div>
         <div class="form-group">
             <label>UPS</label>
             <select id="valUps">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
-                <option value="ADA / TIDAK MENYALA">ADA / TIDAK NYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
@@ -143,8 +144,8 @@
         <div class="form-group">
             <label>STABILIZER</label>
             <select id="valStabilizer">
-                <option value="ADA / MENYALA">ADA / NYALA</option>
-                <option value="ADA / TIDAK MENYALA">ADA / TIDAK NYALA</option>
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
@@ -158,7 +159,12 @@
     <div class="grid">
         <div class="form-group">
             <label>HDD DVR</label>
-            <input type="text" id="hddDvr" value="2 TB">
+            <select id="hddDvr">
+                <option value="1 TB">1 TB</option>
+                <option value="2 TB" selected>2 TB</option>
+                <option value="3 TB">3 TB</option>
+                <option value="4 TB">4 TB</option>
+            </select>
         </div>
         <div class="form-group">
             <label>CCTV ONLINE</label>
@@ -173,7 +179,7 @@
     </div>
     <div class="form-group">
         <label>TGL & JAM BACK UP</label>
-        <input type="text" id="backTgl" placeholder="20/04/2026 JAM 06:38 - 06:40">
+        <textarea id="backTgl" rows="2" placeholder="20/04/2026 JAM 06:38 - 06:40"></textarea>
     </div>
     <div class="form-group">
         <label>CHANEL BACK UP</label>
@@ -181,10 +187,16 @@
     </div>
 
     <div class="section-title">TEMUAN & LAINNYA</div>
-    <div class="form-group"><label>TEMUAN</label><input type="text" id="temuan" value="BUKA TOKO SENDIRI"></div>
-    <div class="form-group"><label>KENDALA</label><input type="text" id="kendala" value="-"></div>
+    <div class="form-group">
+        <label>TEMUAN</label>
+        <textarea id="temuan" rows="2">-</textarea>
+    </div>
+    <div class="form-group">
+        <label>KENDALA</label>
+        <textarea id="kendala" rows="2">-</textarea>
+    </div>
     <div class="form-group"><label>NO CO</label><input type="text" id="noco" value="-"></div>
-    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2"></textarea></div>
+    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2">-</textarea></div>
 
     <button class="btn-gen" onclick="prosesLaporan()">BUAT LAPORAN</button>
     
@@ -195,9 +207,6 @@
 <script src="data-toko.js"></script>
 
 <script>
-
-    document.getElementById('tglCustom').valueAsDate = new Date();
-
     const dataList = document.getElementById('daftarToko');
     listToko.forEach(t => {
         let opt = document.createElement('option');
@@ -205,6 +214,8 @@
         opt.textContent = t.nama;
         dataList.appendChild(opt);
     });
+
+    document.getElementById('tglCustom').valueAsDate = new Date();
 
     function isiOtomatis() {
         const val = document.getElementById('kdtk').value.toUpperCase();
@@ -214,9 +225,10 @@
     }
 
     function hitungMati() {
-        const total = document.getElementById('jmlKamera').value || 0;
-        const aktif = document.getElementById('camAktif').value || 0;
-        document.getElementById('camMati').value = total - aktif;
+        const totalRaw = document.getElementById('jmlKamera').value;
+        const total = parseInt(totalRaw) || 0;
+        const aktif = parseInt(document.getElementById('camAktif').value) || 0;
+        document.getElementById('camMati').value = (total - aktif) + " KAMERA";
     }
 
     function prosesLaporan() {
@@ -226,7 +238,7 @@
         
         if(!kdtk || !namaTk) return alert("Pilih KDTK!");
 
-        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
+        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase();
 
         const template = `LAPORAN KUNJUNGAN CCTV, ${tglFinal}
 
@@ -243,7 +255,7 @@ PASS AREA : - ${kdtk}4321
 LAMA REKAMAN : ${document.getElementById('lamaRekaman').value}
 JUMLAH KAMERA : ${document.getElementById('jmlKamera').value} KAMERA
 AKTIF : ${document.getElementById('camAktif').value} KAMERA
-MATI : ${document.getElementById('camMati').value} KAMERA
+MATI : ${document.getElementById('camMati').value}
 MONITOR : ${document.getElementById('valMonitor').value}
 KRANGKENG : ${document.getElementById('valKrangkeng').value}
 GEMBOK : ${document.getElementById('valGembok').value}
