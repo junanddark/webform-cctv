@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCTV REPORT 1 DVR - LEBAK</title>
+    <style>
+        :root { --primary: #007bff; --success: #28a745; }
+        body { font-family: sans-serif; background: #f0f2f5; padding: 10px; margin: 0; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h2 { text-align: center; color: #333; margin-top: 0; font-size: 18px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .section-title { background: #eee; padding: 5px 10px; font-size: 12px; font-weight: bold; margin: 15px 0 10px 0; border-radius: 4px; color: #555; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 12px; color: #555; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; background: #fff; font-family: sans-serif; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-gen { background: var(--primary); color: white; }
+        .btn-copy { background: var(--success); color: white; display: none; }
+        #hasilLaporan { margin-top: 20px; white-space: pre-wrap; background: #fff9c4; padding: 15px; border: 1px dashed #fbc02d; border-radius: 8px; font-family: monospace; font-size: 12px; display: none; color: #333; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>📝 LAPORAN KUNJUNGAN TOKO T65O</h2>
+    
+    <div class="form-group">
+        <label>TANGGAL KUNJUNGAN</label>
+        <input type="date" id="tglCustom">
+    </div>
+
+    <div class="grid">
+        <div class="form-group">
+            <label>KDTK</label>
+            <input list="daftarToko" id="kdtk" oninput="isiOtomatis()" placeholder="F68G">
+            <datalist id="daftarToko"></datalist>
+        </div>
+        <div class="form-group">
+            <label>NAMA TK</label>
+            <input type="text" id="namaTk" readonly style="background: #eee;">
+        </div>
+    </div>
+
+    <div class="section-title">KONFIGURASI DVR</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>TIPE DVR 1 </label>
+            <select id="tipeDvr1">
+                <option value="DAHUA TECHNOLOGY">DAHUA</option>
+                <option value="GO SECURE">GO SECURE</option>
+                <option value="HIKVISION">HIKVISION</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>TIPE DVR 2 </label>
+            <select id="tipeDvr2">
+                <option value="DAHUA TECHNOLOGY">DAHUA</option>
+                <option value="GO SECURE">GO SECURE</option>
+                <option value="HIKVISION">HIKVISION</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>TIPE DVR 3 </label>
+            <select id="tipeDvr3">
+                <option value="DAHUA TECHNOLOGY">DAHUA</option>
+                <option value="GO SECURE">GO SECURE</option>
+                <option value="HIKVISION">HIKVISION</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>POSISI DVR</label>
+            <select id="posisiDvr">
+                <option value="DI GUDANG">DI GUDANG</option>
+                <option value="DI BELAKANG SHOWCASE">DI BLK SHOWCASE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>POSISI CAM PARKIR</label>
+            <select id="posisiCamParkir">
+                <option value="DIDALAM FG">DIDALAM FG</option>
+                <option value="DILUAR FG">DILUAR FG</option>
+                <option value="DIDALAM & DILUAR FG">DILAM & LUAR FG</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>JML CAM PARKIR</label>
+            <select type="number" id="jmlCamParkir" >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="section-title">REKAMAN & KAMERA</div>
+        <div class="grid">
+            <div class="form-group">
+                <label>LAMA REKAMAN DVR </label>
+                    <select id="lamaRekamanDvr1">
+                        <script>
+                            for(let i=1; i<=100; i++) {
+                            let sel = i === 20 ? 'selected' : '';
+                            document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                            }
+                        </script>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label>LAMA REKAMAN DVR 2 </label>
+                    <select id="lamaRekamanDvr2">
+                        <script>
+                            for(let i=1; i<=100; i++) {
+                            let sel = i === 20 ? 'selected' : '';
+                            document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                            }
+                        </script>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label>LAMA REKAMAN DVR 3 </label>
+                    <select id="lamaRekamanDvr3">
+                        <script>
+                            for(let i=1; i<=100; i++) {
+                            let sel = i === 20 ? 'selected' : '';
+                            document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                            }
+                        </script>
+                    </select>
+            </div>
+        <div class="form-group">
+            <label>RESOLUSI DVR 1</label>
+            <select id="resolusiDvr1">
+                <option value="960*1080">960*1080</option>
+                <option value="640*720">640*720</option>
+                <option value="960*576">960*576</option>
+                <option value="704*576">704*576</option>
+                <option value="640*480">640*480</option>
+                <option value="325*288">325*288</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>RESOLUSI DVR 2</label>
+            <select id="resolusiDvr2">
+                <option value="960*1080">960*1080</option>
+                <option value="640*720">640*720</option>
+                <option value="960*576">960*576</option>
+                <option value="704*576">704*576</option>
+                <option value="640*480">640*480</option>
+                <option value="325*288">325*288</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>RESOLUSI DVR 3</label>
+            <select id="resolusiDvr3">
+                <option value="960*1080">960*1080</option>
+                <option value="640*720">640*720</option>
+                <option value="960*576">960*576</option>
+                <option value="704*576">704*576</option>
+                <option value="640*480">640*480</option>
+                <option value="325*288">325*288</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>FPS DVR 1 </label>
+                <select id="fpsDvr1">
+                    <script>
+                        for(let i=1; i<=35; i++) {
+                        let sel = i === 20 ? 'selected' : '';
+                        document.write(`<option value="${i} FPS" ${sel}>${i} FPS</option>`);
+                        }
+                    </script>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>FPS DVR 2 </label>
+                <select id="fpsDvr2">
+                    <script>
+                        for(let i=1; i<=35; i++) {
+                        let sel = i === 20 ? 'selected' : '';
+                        document.write(`<option value="${i} FPS" ${sel}>${i} FPS</option>`);
+                        }
+                    </script>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>FPS DVR 3 </label>
+                <select id="fpsDvr3">
+                    <script>
+                        for(let i=1; i<=35; i++) {
+                        let sel = i === 20 ? 'selected' : '';
+                        document.write(`<option value="${i} FPS" ${sel}>${i} FPS</option>`);
+                        }
+                    </script>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>KECEPATAN BITRATE DVR 1 </label>
+                <select id="kecBitDvr1">
+                    <option value="1024">1024</option>
+                    <option value="768">768</option>
+                    <option value="512">512</option>
+                    <option value="320">320</option>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>KECEPATAN BITRATE DVR 2 </label>
+                <select id="kecBitDvr2">
+                    <option value="1024">1024</option>
+                    <option value="768">768</option>
+                    <option value="512">512</option>
+                    <option value="320">320</option>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>KECEPATAN BITRATE DVR 3 </label>
+                <select id="kecBitDvr3">
+                    <option value="1024">1024</option>
+                    <option value="768">768</option>
+                    <option value="512">512</option>
+                    <option value="320">320</option>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>TOTAL KAMERA</label>
+            <input type="number" id="jmlKamera" placeholder="14" oninput="hitungMati()">
+        </div>
+
+        <div class="form-group">
+            <label>KAMERA AKTIF</label>
+            <input type="number" id="camAktif" placeholder="14" oninput="hitungMati()">
+        </div>
+
+        <div class="form-group">
+            <label>KAMERA MATI</label>
+            <input type="number" id="camMati" readonly style="background: #eee;">
+        </div>
+
+        <div class="form-group">
+            <label>KAMERA AUDIO</label>
+            <select type="number" id="camAudio" >
+                <option value="BAP">BAP</option>
+                <option value="BAP-BRANGKAS">BAP-BRANGKAS</option>
+                <option value="BAP-KASIRAN">BAP-KASIRAN</option>
+                <option value="BAP-KASIRAN-BRANGKAS">BAP-KASIRAN-BRANGKAS</option>
+                <option value="BAP-KASIRAN-BRANGKAS-PC">BAP-KASIRAN-BRANGKAS-PC</option>
+                <option value="BAP-KASIRAN-BRANGKAS-YCG">BAP-KASIRAN-BRANGKAS-YCG</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="section-title">HARDWARE STATUS</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>MONITOR DVR 1</label>
+            <select id="valMonitorDvr1">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>MONITOR DVR 2</label>
+            <select id="valMonitorDvr2">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>MONITOR DVR 3</label>
+            <select id="valMonitorDvr3">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>KRANGKENG</label>
+            <select id="valKrangkeng">
+                <option value="ADA / DIKUNCI">ADA / KUNCI</option>
+                <option value="ADA / TIDAK DIKUNCI">ADA / TIDAK DIKUNCI</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>GEMBOK</label>
+            <select id="valGembok">
+                <option value="TIDAK ADA">TIDAK ADA</option>
+                <option value="ADA / MENGUNCI">ADA / MENGUNCI</option>
+                <option value="ADA / TIDAK MENGUNCI">ADA / TIDAK MENGUNCI</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>KUNCI GEMBOK</label>
+            <select id="valKunci">
+                <option value="1 PCS">1 PCS</option>
+                <option value="2 PCS">2 PCS</option>
+                <option value="3 PCS">3 PCS</option>
+                <option value="4 PCS">4 PCS</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>UPS</label>
+            <select id="valUps">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>STABILIZER</label>
+            <select id="valStabilizer">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>POWER SUPLAY</label>
+            <select id="valPsu">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>DOORBELL</label>
+            <select id="valDoorbell">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="section-title">STORAGE & ONLINE</div>
+    <div class="grid">
+        <div class="form-group">
+            <label>HDD DVR 1 </label>
+            <select id="hddDvr1">
+                <option value="1TB">1TB</option>
+                <option value="2TB">2TB</option>
+                <option value="3TB">3TB</option>
+                <option value="4TB">4TB</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>HDD DVR 2 </label>
+            <select id="hddDvr2">
+                <option value="1TB">1TB</option>
+                <option value="2TB">2TB</option>
+                <option value="3TB">3TB</option>
+                <option value="4TB">4TB</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>HDD DVR 3 </label>
+            <select id="hddDvr3">
+                <option value="1TB">1TB</option>
+                <option value="2TB">2TB</option>
+                <option value="3TB">3TB</option>
+                <option value="4TB">4TB</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>STATUS JARINGAN DVR 1</label>
+            <select id="statusJaringanDvr1">
+                <option value="TIDAK DAPAT DICEK">TIDAK DAPAT DICEK</option>
+                <option value="OFFLINE">OFFLINE</option>
+                <option value="ONLINE">ONLINE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>STATUS JARINGAN DVR 2</label>
+            <select id="statusJaringanDvr2">
+                <option value="TIDAK DAPAT DICEK">TIDAK DAPAT DICEK</option>
+                <option value="OFFLINE">OFFLINE</option>
+                <option value="ONLINE">ONLINE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>STATUS JARINGAN DVR 3</label>
+            <select id="statusJaringanDvr3">
+                <option value="TIDAK DAPAT DICEK">TIDAK DAPAT DICEK</option>
+                <option value="OFFLINE">OFFLINE</option>
+                <option value="ONLINE">ONLINE</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="section-title">WAKTU & BACKUP</div>
+    <div class="form-group">
+        <label>SELISIH WAKTU DVR 1 </label>
+        <input type="text" id="selisihDvr1" value="- (DISESUAIKAN)">
+    </div>
+    <div class="form-group">
+        <label>SELISIH WAKTU DVR 2 </label>
+        <input type="text" id="selisihDvr2" value="- (DISESUAIKAN)">
+    </div>
+    <div class="form-group">
+        <label>SELISIH WAKTU DVR 3 </label>
+        <input type="text" id="selisihDvr3" value="- (DISESUAIKAN)">
+    </div>
+    <div class="form-group">
+        <label>TGL & JAM BACK UP</label>
+        <textarea type="text" id="backTgl" value="-"></textarea>
+    </div>
+    <div class="form-group">
+        <label>CHANEL BACK UP</label>
+        <input type="text" id="chanel" value="3.4.9">
+    </div>
+
+    <div class="section-title">TEMUAN & LAINNYA</div>
+    <div class="form-group"><label>TEMUAN</label><textarea type="text" id="temuan" value="BUKA TOKO SENDIRI"></textarea></div>
+    <div class="form-group"><label>KENDALA</label><textarea type="text" id="kendala" value="-"></textarea></div>
+    <div class="form-group"><label>NO CO</label><input type="text" id="noco" value="-"></div>
+    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2" value="-"></textarea></div>
+
+    <button class="btn-gen" onclick="prosesLaporan()">BUAT LAPORAN</button>
+    
+    <div id="hasilLaporan"></div>
+    <button id="copyBtn" class="btn-copy" onclick="copyTeks()">📋 SALIN LAPORAN</button>
+</div>
+
+<script src="data-toko.js"></script>
+
+<script>
+
+    document.getElementById('tglCustom').valueAsDate = new Date();
+
+    const dataList = document.getElementById('daftarToko');
+    listToko.forEach(t => {
+        let opt = document.createElement('option');
+        opt.value = t.kode;
+        opt.textContent = t.nama;
+        dataList.appendChild(opt);
+    });
+
+    function isiOtomatis() {
+        const val = document.getElementById('kdtk').value.toUpperCase();
+        const found = listToko.find(t => t.kode === val);
+        document.getElementById('namaTk').value = found ? found.nama : "";
+        hitungMati();
+    }
+
+    function hitungMati() {
+        const total = document.getElementById('jmlKamera').value || 0;
+        const aktif = document.getElementById('camAktif').value || 0;
+        document.getElementById('camMati').value = total - aktif;
+    }
+
+    function prosesLaporan() {
+        const kdtk = document.getElementById('kdtk').value.toUpperCase();
+        const namaTk = document.getElementById('namaTk').value;
+        const d = new Date(document.getElementById('tglCustom').value);
+        
+        if(!kdtk || !namaTk) return alert("Pilih KDTK!");
+
+        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
+
+        const template = `LAPORAN KUNJUNGAN CCTV, ${tglFinal}
+
+KDTK : ${kdtk}
+NAMA TK : ${namaTk}
+TIPE DVR 1 : ${document.getElementById('tipeDvr1').value}
+TIPE DVR 2 : ${document.getElementById('tipeDvr2').value}
+TIPE DVR 3 : ${document.getElementById('tipeDvr3').value}
+POSISI DVR : ${document.getElementById('posisiDvr').value}
+POSISI.CAM.PARKIR : ${document.getElementById('jmlCamParkir').value} (${document.getElementById('posisiCamParkir').value})
+PASS ALL DVR : 
+ADMIN : - G157${kdtk}911
+IC : - LEBAK1234
+EDP : - EDP${kdtk}999
+ACL : - ACLLBK123
+AREA : - ${kdtk}4321
+LAMA REKAMAN DVR 1 : ${document.getElementById('lamaRekamanDvr1').value}
+LAMA REKAMAN DVR 2 : ${document.getElementById('lamaRekamanDvr2').value}
+LAMA REKAMAN DVR 3 : ${document.getElementById('lamaRekamanDvr3').value}
+RESOLUSI DVR 1 : ${document.getElementById('resolusiDvr1').value}
+RESOLUSI DVR 2 : ${document.getElementById('resolusiDvr2').value}
+RESOLUSI DVR 3 : ${document.getElementById('resolusiDvr3').value}
+FPS DVR 1 : ${document.getElementById('fpsDvr1').value}
+FPS DVR 2 : ${document.getElementById('fpsDvr2').value}
+FPS DVR 3 : ${document.getElementById('fpsDvr3').value}
+KECEPATAN BIT DVR 1 : ${document.getElementById('kecBitDvr1').value}
+KECEPATAN BIT DVR 2 : ${document.getElementById('kecBitDvr2').value}
+KECEPATAN BIT DVR 3 : ${document.getElementById('kecBitDvr3').value}
+JUMLAH KAMERA : ${document.getElementById('jmlKamera').value} 
+KAMERA AKTIF : ${document.getElementById('camAktif').value} 
+KAMERA MATI : ${document.getElementById('camMati').value}
+KAMERA AUDIO : ${document.getElementById('camAudio').value}
+MONITOR DVR 1  : ${document.getElementById('valMonitorDvr1').value}
+MONITOR DVR 2  : ${document.getElementById('valMonitorDvr2').value}
+MONITOR DVR 3  : ${document.getElementById('valMonitorDvr3').value}
+KRANGKENG : ${document.getElementById('valKrangkeng').value}
+GEMBOK : ${document.getElementById('valGembok').value}
+KUNCI GEMBOK : ${document.getElementById('valKunci').value}
+UPS : ${document.getElementById('valUps').value}
+STABILIZER : ${document.getElementById('valStabilizer').value}
+POWER SUPLAY : ${document.getElementById('valPsu').value}
+DOORBELL : ${document.getElementById('valDoorbell').value}
+HDD DVR 1 : ${document.getElementById('hddDvr1').value}
+HDD DVR 2 : ${document.getElementById('hddDvr2').value}
+HDD DVR 3 : ${document.getElementById('hddDvr3').value}
+STATUS JARINGAN DVR 1  : ${document.getElementById('statusJaringanDvr1').value}
+STATUS JARINGAN DVR 2  : ${document.getElementById('statusJaringanDvr2').value}
+STATUS JARINGAN DVR 3  : ${document.getElementById('statusJaringanDvr3').value}
+SELISIH WAKTU DVR 1 : ${document.getElementById('selisihDvr1').value}
+SELISIH WAKTU DVR 2 : ${document.getElementById('selisihDvr2').value}
+SELISIH WAKTU DVR 3 : ${document.getElementById('selisihDvr3').value}
+TGL & JAM BACK UP :
+- SOPP1 : ${document.getElementById('backTgl').value}
+CHANEL BACK UP : ${document.getElementById('chanel').value}
+TEMUAN : ${document.getElementById('temuan').value}
+KENDALA : ${document.getElementById('kendala').value}
+NO CO : ${document.getElementById('noco').value}
+NOTE : ${document.getElementById('valNote').value}`;
+
+        const res = document.getElementById('hasilLaporan');
+        res.innerText = template;
+        res.style.display = 'block';
+        document.getElementById('copyBtn').style.display = 'block';
+        res.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyTeks() {
+        navigator.clipboard.writeText(document.getElementById('hasilLaporan').innerText);
+        alert("Laporan disalin!");
+    }
+</script>
+
+</body>
+</html>

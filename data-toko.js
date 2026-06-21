@@ -609,8 +609,6 @@ const listToko = [
 { kode: "TT51", nama: "CIKADUEN" },
 { kode: "TXV2", nama: "GAJRUG" },
 { kode: "TZ4V", nama: "RAYA KAGUNGAN " },
-{ kode: "TZKS", nama: "PARIGI CIKANDE" },
-{ kode: "TB3S", nama: " RAYA BAROS SERANG" }, 
-{ kode: "T2TG", nama: " RAYA PALKA PABUARAN" }
+{ kode: "TZKS", nama: "PARIGI CIKANDE" }
 
 ];

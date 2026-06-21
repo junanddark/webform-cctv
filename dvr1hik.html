@@ -3,148 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CCTV REPORT HIKVISION NEW - LEBAK</title>
+    <title>CCTV REPORT 1 DVR - LEBAK</title>
     <style>
-        :root { 
-            --primary: #007bff; 
-            --primary-dark: #0056b3;
-            --success: #28a745; 
-            --bg: #f4f7f9;
-            --text: #333;
-            --border: #dcdfe6;
-        }
-
-        body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background: var(--bg); 
-            color: var(--text);
-            padding: 15px; 
-            margin: 0; 
-        }
-
-        .card { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 16px; 
-            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.2); 
-            max-width: 650px; 
-            margin: auto; 
-        }
-
-        h2 { 
-            text-align: center; 
-            color: #1a1a1a; 
-            margin-top: 0; 
-            font-size: 20px; 
-            border-bottom: 2px solid var(--bg); 
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .section-title { 
-            background: #f8f9fa; 
-            padding: 8px 12px; 
-            font-size: 11px; 
-            font-weight: 800; 
-            margin: 20px 0 15px 0; 
-            border-radius: 6px; 
-            color: #6c757d; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .form-group { margin-bottom: 15px; }
-
-        label { 
-            display: block; 
-            font-weight: 600; 
-            margin-bottom: 6px; 
-            font-size: 12px; 
-            color: #495057; 
-        }
-
-        input, select, textarea { 
-            width: 100%; 
-            padding: 10px 12px; 
-            border: 1px solid var(--border); 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-size: 15px; 
-            background: #fff; 
-            transition: all 0.2s;
-            color: #2c3e50;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
-        }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 12px; 
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        @media (max-width: 500px) {
-            .grid, .grid-3 { grid-template-columns: 1fr; }
-            .card { padding: 15px; }
-        }
-
-        button { 
-            width: 100%; 
-            padding: 14px; 
-            border: none; 
-            border-radius: 10px; 
-            font-size: 16px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            margin-top: 15px; 
-        }
-
-        .btn-gen { 
-            background: var(--primary); 
-            color: white; 
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-        }
-        
-        .btn-copy { 
-            background: var(--success); 
-            color: white; 
-            display: none; 
-            margin-bottom: 20px;
-        }
-
-        #hasilLaporan { 
-            margin-top: 20px; 
-            white-space: pre-wrap; 
-            background: #fffdf0; 
-            padding: 15px; 
-            border: 1px solid #ffeeba; 
-            border-radius: 10px; 
-            font-family: 'Courier New', Courier, monospace; 
-            font-size: 13px; 
-            display: none; 
-            line-height: 1.4;
-        }
-
-        textarea { resize: vertical; min-height: 60px; }
-        input[readonly] { background: #f1f3f5 !important; color: #6c757d; }
+        :root { --primary: #007bff; --success: #28a745; }
+        body { font-family: sans-serif; background: #f0f2f5; padding: 10px; margin: 0; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h2 { text-align: center; color: #333; margin-top: 0; font-size: 18px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .section-title { background: #eee; padding: 5px 10px; font-size: 12px; font-weight: bold; margin: 15px 0 10px 0; border-radius: 4px; color: #555; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 12px; color: #555; }
+        input, select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 16px; background: #fff; font-family: sans-serif; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        button { width: 100%; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-gen { background: var(--primary); color: white; }
+        .btn-copy { background: var(--success); color: white; display: none; }
+        #hasilLaporan { margin-top: 20px; white-space: pre-wrap; background: #fff9c4; padding: 15px; border: 1px dashed #fbc02d; border-radius: 8px; font-family: monospace; font-size: 12px; display: none; color: #333; }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h2>📝 CCTV REPORT (HIKVISION NEW)</h2>
-    
+    <h2>📝 LAPORAN KUNJUNGAN TOKO 1 DVR HIK NEW
     <div class="form-group">
         <label>TANGGAL KUNJUNGAN</label>
         <input type="date" id="tglCustom">
@@ -153,12 +32,12 @@
     <div class="grid">
         <div class="form-group">
             <label>KDTK</label>
-            <input list="daftarToko" id="kdtk" oninput="isiOtomatis()" placeholder="Cari Kode Toko...">
+            <input list="daftarToko" id="kdtk" oninput="isiOtomatis()" placeholder="F68G">
             <datalist id="daftarToko"></datalist>
         </div>
         <div class="form-group">
             <label>NAMA TK</label>
-            <input type="text" id="namaTk" readonly>
+            <input type="text" id="namaTk" readonly style="background: #eee;">
         </div>
     </div>
 
@@ -166,13 +45,15 @@
     <div class="grid">
         <div class="form-group">
             <label>TIPE DVR</label>
-            <input type="text" id="tipeDvr" value="HIKVISION NEW" readonly>
+            <select id="tipeDvr">
+                <option value="HIKVISION NEW">HIKVISION NEW</option>
+            </select>
         </div>
         <div class="form-group">
             <label>POSISI DVR</label>
             <select id="posisiDvr">
                 <option value="DI GUDANG">DI GUDANG</option>
-                <option value="DI BELAKANG SHOWCASE">DI BALIK SHOWCASE</option>
+                <option value="DI BELAKANG SHOWCASE">DI BLK SHOWCASE</option>
             </select>
         </div>
     </div>
@@ -182,52 +63,96 @@
             <select id="posisiCamParkir">
                 <option value="DIDALAM FG">DIDALAM FG</option>
                 <option value="DILUAR FG">DILUAR FG</option>
-                <option value="DIDALAM & DILUAR FG">DIDALAM & DILUAR FG</option>
+                <option value="DIDALAM & DILUAR FG">DILAM & LUAR FG</option>
             </select>
         </div>
         <div class="form-group">
             <label>JML CAM PARKIR</label>
-            <input type="number" id="jmlCamParkir" placeholder="2">
+            <select type="number" id="jmlCamParkir" >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
         </div>
     </div>
 
     <div class="section-title">REKAMAN & KAMERA</div>
-    <div class="grid-3">
+        <div class="grid">
+            <div class="form-group">
+                <label>LAMA REKAMAN</label>
+                    <select id="lamaRekaman">
+                        <script>
+                            for(let i=1; i<=100; i++) {
+                            let sel = i === 20 ? 'selected' : '';
+                            document.write(`<option value="${i} HARI" ${sel}>${i} HARI</option>`);
+                            }
+                        </script>
+                    </select>
+            </div>
         <div class="form-group">
-            <label>LAMA REKAMAN</label>
-            <select id="lamaRekaman"></select>
+            <label>RESOLUSI</label>
+            <select id="resolusi">
+                <option value="960*1080">960*1080</option>
+                <option value="640*720">640*720</option>
+                <option value="960*576">960*576</option>
+                <option value="704*576">704*576</option>
+                <option value="640*480">640*480</option>
+                <option value="325*288">325*288</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>FPS</label>
+                <select id="fps">
+                    <script>
+                        for(let i=1; i<=35; i++) {
+                        let sel = i === 20 ? 'selected' : '';
+                        document.write(`<option value="${i} FPS" ${sel}>${i} FPS</option>`);
+                        }
+                    </script>
+                </select>
+        </div>
+        <div class="form-group">
+            <label>KECEPATAN BITRATE</label>
+                <select id="kecBit">
+                    <option value="1024">1024</option>
+                    <option value="768">768</option>
+                    <option value="512">512</option>
+                    <option value="320">320</option>
+                </select>
         </div>
         <div class="form-group">
             <label>TOTAL KAMERA</label>
-            <select id="jmlKamera" onchange="hitungMati()"></select>
+            <input type="number" id="jmlKamera" placeholder="14" oninput="hitungMati()">
         </div>
-        <div class="form-group">
-            <label>JML SLOT KAMERA</label>
-            <select id="sltKamera">
-                <option value="8 SLOT">8 SLOT</option>
-                <option value="16 SLOT" selected>16 SLOT</option>
-                <option value="32 SLOT">32 SLOT</option>
-            </select>
-        </div>
-    </div>
-    <div class="grid-3">
+
         <div class="form-group">
             <label>KAMERA AKTIF</label>
-            <select id="camAktif" onchange="hitungMati()"></select>
+            <input type="number" id="camAktif" placeholder="14" oninput="hitungMati()">
         </div>
+
         <div class="form-group">
             <label>KAMERA MATI</label>
-            <input type="text" id="camMati" readonly>
+            <input type="number" id="camMati" readonly style="background: #eee;">
         </div>
+
         <div class="form-group">
             <label>KAMERA AUDIO</label>
-            <select id="camAudio">
+            <select type="number" id="camAudio" >
                 <option value="BAP">BAP</option>
-                <option value="BAP1-KASIRAN2">BAP-KASIRAN-BRANGKAS</option>
-                <option value="BAP-KASIRAN-BRANGKAS-YCG">BAP-KASIRAN-BRANGKAS-YCG</option>
+                <option value="BAP-BRANGKAS">BAP-BRANGKAS</option>
+                <option value="BAP-KASIRAN">BAP-KASIRAN</option>
+                <option value="BAP-KASIRAN-BRANGKAS">BAP-KASIRAN-BRANGKAS</option>
                 <option value="BAP-KASIRAN-BRANGKAS-PC">BAP-KASIRAN-BRANGKAS-PC</option>
+                <option value="BAP-KASIRAN-BRANGKAS-YCG">BAP-KASIRAN-BRANGKAS-YCG</option>
             </select>
         </div>
+
     </div>
 
     <div class="section-title">HARDWARE STATUS</div>
@@ -243,27 +168,28 @@
         <div class="form-group">
             <label>KRANGKENG</label>
             <select id="valKrangkeng">
-                <option value="ADA / DIKUNCI">ADA / DIKUNCI</option>
+                <option value="ADA / DIKUNCI">ADA / KUNCI</option>
                 <option value="ADA / TIDAK DIKUNCI">ADA / TIDAK DIKUNCI</option>
                 <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
     </div>
-    <div class="grid-3">
+    <div class="grid">
         <div class="form-group">
             <label>GEMBOK</label>
             <select id="valGembok">
                 <option value="TIDAK ADA">TIDAK ADA</option>
                 <option value="ADA / MENGUNCI">ADA / MENGUNCI</option>
+                <option value="ADA / TIDAK MENGUNCI">ADA / TIDAK MENGUNCI</option>
             </select>
         </div>
         <div class="form-group">
-            <label>KUNCI TERSEDIA</label>
+            <label>KUNCI GEMBOK</label>
             <select id="valKunci">
-                <option value="TIDAK ADA">TIDAK ADA</option>
                 <option value="1 PCS">1 PCS</option>
                 <option value="2 PCS">2 PCS</option>
                 <option value="3 PCS">3 PCS</option>
+                <option value="4 PCS">4 PCS</option>
             </select>
         </div>
         <div class="form-group">
@@ -275,7 +201,7 @@
             </select>
         </div>
     </div>
-    <div class="grid-3">
+    <div class="grid">
         <div class="form-group">
             <label>STABILIZER</label>
             <select id="valStabilizer">
@@ -285,17 +211,19 @@
             </select>
         </div>
         <div class="form-group">
-            <label>RESOLUSI REKAMAN</label>
-            <select id="resolusiRekaman">
-                <option value="1280*1024">1280*1024</option>
-                <option value="960*576">960*576</option>
+            <label>POWER SUPLAY</label>
+            <select id="valPsu">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
         <div class="form-group">
-            <label>FPS</label>
-            <select id="fps">
-                <option value="25 FPS">25 FPS</option>
-                <option value="15 FPS" selected>15 FPS</option>
+            <label>DOORBELL</label>
+            <select id="valDoorbell">
+                <option value="ADA / MENYALA">ADA / MENYALA</option>
+                <option value="ADA / TIDAK MENYALA">ADA / TIDAK MENYALA</option>
+                <option value="TIDAK ADA">TIDAK ADA</option>
             </select>
         </div>
     </div>
@@ -305,14 +233,19 @@
         <div class="form-group">
             <label>HDD DVR</label>
             <select id="hddDvr">
-                <option value="1 TB">1 TB</option>
-                <option value="2 TB" selected>2 TB</option>
-                <option value="4 TB">4 TB</option>
+                <option value="1TB">1TB</option>
+                <option value="2TB">2TB</option>
+                <option value="3TB">3TB</option>
+                <option value="4TB">4TB</option>
             </select>
         </div>
         <div class="form-group">
             <label>CCTV ONLINE</label>
-            <input type="text" id="cctvOnline" value="TIDAK DAPAT DICEK">
+            <select id="cctvOnline">
+                <option value="TIDAK DAPAT DICEK">TIDAK DAPAT DICEK</option>
+                <option value="OFFLINE">OFFLINE</option>
+                <option value="ONLINE">ONLINE</option>
+            </select>
         </div>
     </div>
 
@@ -323,7 +256,7 @@
     </div>
     <div class="form-group">
         <label>TGL & JAM BACK UP</label>
-        <textarea id="backTgl" placeholder="Contoh: 20/04/2026 JAM 06:38 - 06:40"></textarea>
+        <textarea type="text" id="backTgl" value="-"></textarea>
     </div>
     <div class="form-group">
         <label>CHANEL BACK UP</label>
@@ -331,26 +264,10 @@
     </div>
 
     <div class="section-title">TEMUAN & LAINNYA</div>
-    <div class="grid">
-        <div class="form-group">
-            <label>TEMUAN</label>
-            <textarea id="temuan">-</textarea>
-        </div>
-        <div class="form-group">
-            <label>KENDALA</label>
-            <textarea id="kendala">-</textarea>
-        </div>
-    </div>
-    <div class="grid">
-        <div class="form-group">
-            <label>NO CO</label>
-            <input type="text" id="noco" value="-">
-        </div>
-        <div class="form-group">
-            <label>NOTE</label>
-            <textarea id="valNote">-</textarea>
-        </div>
-    </div>
+    <div class="form-group"><label>TEMUAN</label><textarea type="text" id="temuan" value="BUKA TOKO SENDIRI"></textarea></div>
+    <div class="form-group"><label>KENDALA</label><textarea type="text" id="kendala" value="-"></textarea></div>
+    <div class="form-group"><label>NO CO</label><input type="text" id="noco" value="-"></div>
+    <div class="form-group"><label>NOTE</label><textarea id="valNote" rows="2" value="-"></textarea></div>
 
     <button class="btn-gen" onclick="prosesLaporan()">BUAT LAPORAN</button>
     
@@ -361,79 +278,38 @@
 <script src="data-toko.js"></script>
 
 <script>
-    const dataList = document.getElementById('daftarToko');
-    if (typeof listToko !== 'undefined') {
-        listToko.forEach(t => {
-            let opt = document.createElement('option');
-            opt.value = t.kode;
-            opt.textContent = t.nama;
-            dataList.appendChild(opt);
-        });
-    }
 
     document.getElementById('tglCustom').valueAsDate = new Date();
 
-    function generateOptions() {
-        const selLama = document.getElementById('lamaRekaman');
-        for(let i=1; i<=150; i++) {
-            let opt = document.createElement('option');
-            opt.value = i + " HARI";
-            opt.textContent = i + " HARI";
-            if(i === 30) opt.selected = true;
-            selLama.appendChild(opt);
-        }
-
-        const jmlKamera = document.getElementById('jmlKamera');
-        const camAktif = document.getElementById('camAktif');
-        const jumlahMax = 32;
-
-        for (let i = 1; i <= jumlahMax; i++) {
-            let opt1 = document.createElement("option");
-            opt1.value = i + " KAMERA";
-            opt1.textContent = i + " KAMERA";
-            if(i === 16) opt1.selected = true;
-            jmlKamera.appendChild(opt1);
-
-            let opt2 = document.createElement("option");
-            opt2.value = i + " KAMERA";
-            opt2.textContent = i + " KAMERA";
-            if(i === 16) opt2.selected = true;
-            camAktif.appendChild(opt2);
-        }
-    }
-
-    generateOptions();
+    const dataList = document.getElementById('daftarToko');
+    listToko.forEach(t => {
+        let opt = document.createElement('option');
+        opt.value = t.kode;
+        opt.textContent = t.nama;
+        dataList.appendChild(opt);
+    });
 
     function isiOtomatis() {
         const val = document.getElementById('kdtk').value.toUpperCase();
-        if (typeof listToko !== 'undefined') {
-            const found = listToko.find(t => t.kode === val);
-            document.getElementById('namaTk').value = found ? found.nama : "";
-        }
+        const found = listToko.find(t => t.kode === val);
+        document.getElementById('namaTk').value = found ? found.nama : "";
         hitungMati();
     }
 
     function hitungMati() {
-        const total = parseInt(document.getElementById('jmlKamera').value) || 0;
-        const aktif = parseInt(document.getElementById('camAktif').value) || 0;
-        document.getElementById('camMati').value = (total - aktif) + " KAMERA";
+        const total = document.getElementById('jmlKamera').value || 0;
+        const aktif = document.getElementById('camAktif').value || 0;
+        document.getElementById('camMati').value = total - aktif;
     }
 
     function prosesLaporan() {
         const kdtk = document.getElementById('kdtk').value.toUpperCase();
         const namaTk = document.getElementById('namaTk').value;
         const d = new Date(document.getElementById('tglCustom').value);
+        
         if(!kdtk || !namaTk) return alert("Pilih KDTK!");
 
-        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }).toUpperCase();
-
-        const pass = {
-            admin: "G157" + kdtk + "911",
-            ic: "LEBAK@12",
-            mtc: "ACLLBK12",
-            edp: kdtk + "@999",
-            area: kdtk + "@432"
-        };
+        const tglFinal = d.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
 
         const template = `LAPORAN KUNJUNGAN CCTV, ${tglFinal}
 
@@ -442,30 +318,32 @@ NAMA TK : ${namaTk}
 TIPE DVR : ${document.getElementById('tipeDvr').value}
 POSISI DVR : ${document.getElementById('posisiDvr').value}
 POSISI.CAM.PARKIR : ${document.getElementById('jmlCamParkir').value} (${document.getElementById('posisiCamParkir').value})
-PASS DVR ALL :
-- ADMIN : ${pass.admin}
-- IC : ${pass.ic}
-- MTC : ${pass.mtc}
-- EDP : ${pass.edp}
-- AREA : ${pass.area}
+PASS ADMIN : - G157${kdtk}911
+PASS IC : - LEBAK@12
+PASS EDP : - ${kdtk}@999
+PASS ACL : - ACLLBK12
+PASS AREA : - ${kdtk}@432
 LAMA REKAMAN : ${document.getElementById('lamaRekaman').value}
+RESOLUSI DVR : ${document.getElementById('resolusi').value}
+FPS : ${document.getElementById('fps').value}
+KECEPATAN BIT : ${document.getElementById('kecBit').value}
 JUMLAH KAMERA : ${document.getElementById('jmlKamera').value} 
-SLOT KAMERA : ${document.getElementById('sltKamera').value} 
 KAMERA AKTIF : ${document.getElementById('camAktif').value} 
 KAMERA MATI : ${document.getElementById('camMati').value}
 KAMERA AUDIO : ${document.getElementById('camAudio').value}
 MONITOR : ${document.getElementById('valMonitor').value}
 KRANGKENG : ${document.getElementById('valKrangkeng').value}
 GEMBOK : ${document.getElementById('valGembok').value}
-KUNCI GEMBOK TERSEDIA : ${document.getElementById('valKunci').value}
+KUNCI GEMBOK : ${document.getElementById('valKunci').value}
 UPS : ${document.getElementById('valUps').value}
 STABILIZER : ${document.getElementById('valStabilizer').value}
+POWER SUPLAY : ${document.getElementById('valPsu').value}
+DOORBELL : ${document.getElementById('valDoorbell').value}
 HDD DVR : ${document.getElementById('hddDvr').value}
-RESOLUSI REKAMAN : ${document.getElementById('resolusiRekaman').value}
-FPS : ${document.getElementById('fps').value}
 CCTV ONLINE : ${document.getElementById('cctvOnline').value}
 SELISIH WAKTU : ${document.getElementById('selisih').value}
-TGL & JAM BACK UP : ${document.getElementById('backTgl').value}
+TGL & JAM BACK UP :
+- SOPP1 : ${document.getElementById('backTgl').value}
 CHANEL BACK UP : ${document.getElementById('chanel').value}
 TEMUAN : ${document.getElementById('temuan').value}
 KENDALA : ${document.getElementById('kendala').value}
